@@ -1,0 +1,6 @@
+docker run -it --rm --entrypoint bash -v 'C:\Users\Samuel Schmidt\Documents\workspace\jeopardy-study:/jeo' -p 8080:80 node:25-slim
+
+
+node server.js
+
+go to localhost:8080/game/9418 (or any other game number) in your browser

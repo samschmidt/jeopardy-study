@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Jeopardy Player</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #clue {
+      font-size: 24px;
+      margin: 20px;
+    }
+    #answer {
+      font-size: 20px;
+      color: green;
+      display: none;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Jeopardy Game</h1>
+
+  <div id="clue">Loading...</div>
+  <div id="answer"></div>
+
+  <button onclick="showAnswer()">Show Answer</button>
+  <button onclick="nextClue()">Next Clue</button>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jeopardy Player</title>
+  <style>
+    body { text-align: center; font-family: Arial; }
+    #clue { font-size: 24px; margin: 20px; }
+    #answer { color: green; display: none; }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<h1 id="round"></h1>
+<h2 id="category"></h2>
+<h3 id="value"></h3>
+
+<div id="clue"></div>
+<div id="answer"></div>
+
+<button onclick="showAnswer()">Show Answer</button>
+<button onclick="nextClue()">Next</button>
+
+<script>
+  // Inject server data into client
+  const clues = <%- JSON.stringify(clues) %>;
+
+  let index = 0;
+
+  function render() {
+    const clue = clues[index];
+    document.getElementById("round").textContent = clue.round;
+    document.getElementById("clue").textContent = clue.question;
+    document.getElementById("answer").textContent = clue.answer;
+    document.getElementById("answer").style.display = "none";
+    document.getElementById("category").textContent = clue.category;
+    document.getElementById("value").textContent = clue.value;
+
+  }
+
+  function showAnswer() {
+    document.getElementById("answer").style.display = "block";
+  }
+
+  function hideAnswer() {
+    render();
+  }
+
+  function nextClue() {
+    index++;
+    if (index >= clues.length) {
+      document.getElementById("clue").textContent = "Game over!";
+      index = clues.length-1;
+      return;
+    }
+    render();
+  }
+
+  function previousClue() {
+    if (index > 0) {
+      index--;
+    }
+    render();
+  }
+
+  $(document).ready(function($){
+    $(document).keydown(function(e) {
+      console.log("keypress ", e.which);
+
+      if (e.which === 37) { //left
+        console.log("left");
+        previousClue();
+      }
+      if (e.which === 38) { //up
+        console.log("up");
+        hideAnswer();
+      }
+      if (e.which === 39) { //right
+        console.log("right");
+        nextClue();
+      }
+      if (e.which === 40) { //down
+        console.log("down");
+        showAnswer();
+      }
+    });
+  });
+
+  render();
+</script>
+
+</body>
+</html>
